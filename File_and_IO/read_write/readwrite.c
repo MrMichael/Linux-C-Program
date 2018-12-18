@@ -25,15 +25,15 @@ int main(void)
 		printf("open %s ok\r\n", filename);
 	}
 	
-	/*n = write(fd, "1234512345", 10);
+	n = write(fd, "1234567890", 10);
 	if(n == -1) {
 		printf("write %s fail\r\n",filename);
 	} else {
 		printf("write %s %d buff\r\n",filename, n);
 	}
-	*/
-		
-	sleep(1);
+	
+	//由于write操作会使读写位置处于内容末尾，需要指向到当前位置的前10偏移位置
+	lseek(fd, -10, SEEK_CUR);
 	
 	n = read(fd, buf, 10);
 	if(n == -1) {
